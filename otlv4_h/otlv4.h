@@ -3409,22 +3409,6 @@ inline void otl_var_info_var3(const char *name, const int ftype,
   OTL_STRCAT_S(var_info, var_info_sz, buf2);
 }
 
-inline void otl_var_info_var4(const char *name, const int ftype,
-                              const int type_code, char *var_info,
-                              const size_t var_info_sz) {
-  char buf1[128];
-  char buf2[128];
-  OTL_STRCPY_S(buf1, sizeof(buf1), otl_var_type_name(ftype));
-  OTL_STRCPY_S(buf2, sizeof(buf2), otl_var_type_name(type_code));
-  OTL_STRCPY_S(var_info, var_info_sz, "Variable: ");
-  OTL_STRCAT_S(var_info, var_info_sz, name);
-  OTL_STRCAT_S(var_info, var_info_sz, "<");
-  OTL_STRCAT_S(var_info, var_info_sz, buf1);
-  OTL_STRCAT_S(var_info, var_info_sz,
-               ">, datatype in otl_stream_read_iterator::get(): ");
-  OTL_STRCAT_S(var_info, var_info_sz, buf2);
-}
-
 inline void otl_strcpy(unsigned char *trg, unsigned char *src, int &overflow,
                        const int inp_size = 0, const int actual_inp_size = -1) {
   OTL_CHAR *c1 = OTL_RCAST(OTL_CHAR *, trg);
@@ -29964,7 +29948,7 @@ protected:
       if (type_code == otl_var_long_string && lob_stream_mode_flag_ &&
           lob_stream_arg) {
         char var_info1[255];
-        otl_var_info_var4(out_vars_[pos - 1].name, out_vars_[pos - 1].ftype,
+        otl_var_info_var3(out_vars_[pos - 1].name, out_vars_[pos - 1].ftype,
                           otl_var_lob_stream, var_info1, sizeof(var_info1));
         OTL_THROW((OTLException(otl_error_msg_28, otl_error_code_28,
                                 str_->get_stm_text(), var_info1)));
